@@ -22,10 +22,5 @@ namespace MyAirport.Serveur
 
         [OperationContract]
         MyAirport.Pim.Entities.RoutageBagage GetInfoRoutage(int idBagage);
-
-        
-        
     }
-
-   
 }

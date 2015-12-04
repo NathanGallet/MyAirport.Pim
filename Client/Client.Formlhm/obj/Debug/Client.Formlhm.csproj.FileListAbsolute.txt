@@ -20,3 +20,9 @@ F:\Firefox DL\programmation\C#\MyAirport.Pim\Client.Formlhm\obj\Debug\Client.For
 C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\bin\Debug\Client.Formlhm.exe.config
 C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\obj\Debug\Client.Formlhm.exe
 C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\obj\Debug\Client.Formlhm.pdb
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\obj\Debug\Client.Formlhm.csprojResolveAssemblyReference.cache
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\obj\Debug\Client.Formlhm.Form1.resources
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\obj\Debug\Client.Formlhm.Properties.Resources.resources
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\obj\Debug\Client.Formlhm.csproj.GenerateResource.Cache
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\bin\Debug\Client.Formlhm.exe
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Client\Client.Formlhm\bin\Debug\Client.Formlhm.pdb

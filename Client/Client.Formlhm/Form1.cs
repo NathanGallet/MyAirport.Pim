@@ -13,9 +13,11 @@ namespace Client.Formlhm
 {
     public partial class Form1 : Form
     {
+        ServiceBagageReference.ServiceClient proxy = null;
         public Form1()
         {
             InitializeComponent();
+            proxy = new ServiceBagageReference.ServiceClient();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,8 +29,7 @@ namespace Client.Formlhm
         {
             try
             {
-             
-                var bagage2 = MyAirport.Pim.Model.Factory.Model.GetBagage(this.tbAlpha.Text);
+                var bagage2 = proxy.GetBagagebyCodeIata(this.tbAlpha.Text);
                 this.tbAlpha.Text = bagage2.LigneAlpha.ToString();
                 this.tbAlpha.Enabled = false;
                 this.tbClasseBag.Text = bagage2.ClasseBagage.ToString();
