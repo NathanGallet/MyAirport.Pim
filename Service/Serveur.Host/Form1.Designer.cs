@@ -60,6 +60,7 @@ namespace Serveur.Host
             this.buttonCreate.TabIndex = 3;
             this.buttonCreate.Text = "Create";
             this.buttonCreate.UseVisualStyleBackColor = true;
+            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click_1);
             // 
             // buttonOpen
             // 
@@ -86,6 +87,7 @@ namespace Serveur.Host
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.host_State);
             // 
             // listBox1
             // 

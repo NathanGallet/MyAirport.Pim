@@ -28,9 +28,9 @@ namespace Serveur.Host
             this.listBox1.Items.Add("Chagnement d'état :" + this.host.State.ToString());
         }
 
-        private void buttonCreate_Click(object sender, EventArgs e)
+        private void buttonCreate_Click_1(object sender, EventArgs e)
         {
-            host = new ServiceHost(typeof(MyAirport.Serveur.IService));
+            host = new ServiceHost(typeof(MyAirport.Serveur.Service));
 
             host.Closed += host_State;
             host.Closing += host_State;
@@ -42,5 +42,6 @@ namespace Serveur.Host
             this.listBox1.Items.Clear();
             this.listBox1.Items.Add("Création du service.");
         }
+
     }
 }
