@@ -45,11 +45,13 @@ namespace MyAirport.Serveur
                 }
                 else
                 {
-                    throw new Exception("Trop de bagage retourné");
+                    
+                    throw new FaultException(new FaultReason("Il existe " + res.Count + " bagages avec le code Iata demandé"), 
+                        new FaultCode("MultipleBagage"));
                 }
             }
             else
-            {
+            {   
                 return null;
             }
         }

@@ -29,11 +29,11 @@ namespace MyAirport.Pim.Model
                                             "LEFT JOIN [MyAirport].[dbo].[BAGAGE_PARTICULARITE] BP ON BP.ID_PART = BAP.ID_PARTICULARITE " +
                                             "WHERE B.CODE_IATA = @code;";
 
-        string commandAddBagage = "INSERT INTO BAGAGE VALUES (CODE_IATA, COMPAGNIE, LIGNE, JOUR_EXPLOITATION, ESCALE, CLASSE, ORIGINE_CREATION, DATE_CREATION, ORIGINE_SAFIR, EN_CONTINUATION, EN_TRANSFERT)"+
-                                  "VALUES (@codeIata, @compagnie, @ligne, @jourExploi, @escale, @classe, 'D', @dateCrea, 0, 0, 0)";
+        string commandAddBagage = "INSERT INTO BAGAGE (CODE_IATA, COMPAGNIE, LIGNE, JOUR_EXPLOITATION, ESCALE, CLASSE, ORIGINE_CREATION, DATE_CREATION) " +
+                                  "VALUES (@codeIata, @compagnie, @ligne, @jourExploi, @escale, @classe, 'D', @dateCrea)";
 
-        string commandBagageRush = "INSERT INTO BAGAGE_A_POUR_PARTICULARITE (ID_BAGAGE, ID_PARTICULARITE)" +
-                                   "VALUES(@idBagage, @idBagageParti)";
+        string commandBagageRush = "INSERT INTO BAGAGE_A_POUR_PARTICULARITE (ID_BAGAGE, ID_PARTICULARITE) " +
+                                   "VALUES (@idBagage, @idBagageParti)";
 
         public override List<BagageDefinition> GetBagageByCodeIata(string CodeIata)
         {
@@ -74,7 +74,7 @@ namespace MyAirport.Pim.Model
         {
             using (SqlConnection cnx = new SqlConnection(strcnx))
             {
-                SqlCommand cmd = new SqlCommand(commandGetBagageByCodeIata, cnx);
+                SqlCommand cmd = new SqlCommand(commandAddBagage, cnx);
                 cmd.Parameters.AddWithValue("@codeIata", bag.CodeIata);
                 cmd.Parameters.AddWithValue("@compagnie", bag.Compagnie);
                 cmd.Parameters.AddWithValue("@ligne", bag.Ligne);
@@ -82,9 +82,11 @@ namespace MyAirport.Pim.Model
                 cmd.Parameters.AddWithValue("@escale", bag.Itineraire);
                 cmd.Parameters.AddWithValue("@classe", bag.ClasseBagage);
                 cmd.Parameters.AddWithValue("@dateCrea", DateTime.Now);
-
+               
                 cnx.Open();
-                bag.IdBagage = Convert.ToInt32(cmd.ExecuteScalar());
+                var Idbag = Convert.ToInt32(cmd.ExecuteScalar());
+
+                bag.IdBagage = Idbag;
 
                 if(bag.Rush == true)
                 {

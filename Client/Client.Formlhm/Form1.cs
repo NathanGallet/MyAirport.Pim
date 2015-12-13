@@ -40,21 +40,15 @@ namespace Client.Formlhm
 
                 disableInput();
             }
-            catch (ApplicationException appEx)
+            /*catch (ApplicationException appEx)
             {
                 this.tbAlpha.Text = this.tbClasseBag.Text = this.tbCompagnie.Text = this.tbItineraire.Text = this.tbJourExploitation.Text = this.tbLigne.Text = "";
                 this.cbContinuation.Checked = this.cbRush.Checked = false;
                 this.tbAlpha.Enabled = this.tbClasseBag.Enabled = this.tbCompagnie.Enabled = this.tbItineraire.Enabled = this.tbJourExploitation.Enabled =
                 this.tbLigne.Enabled = this.cbContinuation.Enabled = this.cbRush.Enabled = true;
 
-            }
-            catch (CommunicationException excp)
-            {
-                this.listBoxLogs.Items.Add("Une erreur de communication c'est produite dans le traitement de votre demande");
-                this.listBoxLogs.Items.Add("\tType: " + excp.GetType().ToString());
-                this.listBoxLogs.Items.Add("\tMessage: " + excp.Message);
-            }
-            catch (Exception excp)
+            }*/
+            catch (FaultException excp)
             {
                 this.listBoxLogs.Items.Add("Une erreur s'est produite dans le traitement de votre demande");
                 this.listBoxLogs.Items.Add("\tType: " + excp.GetType().ToString());
@@ -78,7 +72,7 @@ namespace Client.Formlhm
 
             proxy.CreateBagage(bag);
             this.listBoxLogs.Items.Add("Le bagage a bien été enregistré, ID : " + bag.IdBagage);
-            
+            disableInput();
         }
 
         //decoche tous les boutons
@@ -92,6 +86,13 @@ namespace Client.Formlhm
             this.tbLigne.Enabled = false;
             this.cbContinuation.Enabled = false;
             this.cbRush.Enabled = false;
+
+            this.tbAlpha.Text = "";
+            this.tbClasseBag.Text = "";
+            this.tbCompagnie.Text = "";
+            this.tbItineraire.Text = "";
+            this.tbJourExploitation.Text = "";
+            this.tbLigne.Text = "";
         }
 
         //coche tous les boutons
