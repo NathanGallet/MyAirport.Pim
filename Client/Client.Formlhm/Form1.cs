@@ -44,11 +44,11 @@ namespace Client.Formlhm
             
             catch (FaultException<MultipleBagageFault> excp)
             {
-                List<BagageDefinition> allBagage = new List<BagageDefinition>();
-
+                this.listBoxLogs.Items.Add(excp.Detail.Message);
+       
                 foreach (var bag in excp.Detail.ListBagages)
                 {
-                    this.listBoxLogs.Items.Add(bag);
+                    this.listBoxLogs.Items.Add("Code Iata :" + bag.CodeIata + " BagageId : " + bag.IdBagage);
                 }
 
             }

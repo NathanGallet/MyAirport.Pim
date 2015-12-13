@@ -63,6 +63,10 @@ namespace MyAirport.Serveur
             }
             catch (FaultException<MultipleBagageFault> excp)
             {
+                 throw excp;
+            }
+            catch (FaultException excp)
+            {
                 throw excp;
             }
             catch (Exception)

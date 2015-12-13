@@ -24,7 +24,6 @@ namespace Serveur.Host
 
         void host_State(object sender, EventArgs e)
         {
-            this.textBox1.Text = this.host.State.ToString();
             this.listBox1.Items.Add("Changement d'état :" + this.host.State.ToString());
         }
 
@@ -46,7 +45,6 @@ namespace Serveur.Host
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             host.Open();
-            this.textBox1.Text = host.State.ToString();
         }
     }
 }
