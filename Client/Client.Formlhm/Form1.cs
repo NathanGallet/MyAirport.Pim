@@ -8,18 +8,19 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Client.Formlhm.ServiceBagageReference;
 
 
 namespace Client.Formlhm
 {
     public partial class Form1 : Form
     {
-        ServiceBagageReference.ServiceClient proxy = null;
+        ServiceClient proxy = null;
 
         public Form1()
         {
             InitializeComponent();
-            proxy = new ServiceBagageReference.ServiceClient();
+            proxy = new ServiceClient();
         }
 
         //bouton de recherche de bagage
@@ -40,27 +41,40 @@ namespace Client.Formlhm
 
                 disableInput();
             }
-            /*catch (ApplicationException appEx)
+            
+            catch (FaultException<MultipleBagageFault> excp)
             {
-                this.tbAlpha.Text = this.tbClasseBag.Text = this.tbCompagnie.Text = this.tbItineraire.Text = this.tbJourExploitation.Text = this.tbLigne.Text = "";
-                this.cbContinuation.Checked = this.cbRush.Checked = false;
-                this.tbAlpha.Enabled = this.tbClasseBag.Enabled = this.tbCompagnie.Enabled = this.tbItineraire.Enabled = this.tbJourExploitation.Enabled =
-                this.tbLigne.Enabled = this.cbContinuation.Enabled = this.cbRush.Enabled = true;
+                List<BagageDefinition> allBagage = new List<BagageDefinition>();
 
-            }*/
+                foreach (var bag in excp.Detail.ListBagages)
+                {
+                    this.listBoxLogs.Items.Add(bag);
+                }
+
+            }
+
             catch (FaultException excp)
             {
                 this.listBoxLogs.Items.Add("Une erreur s'est produite dans le traitement de votre demande");
                 this.listBoxLogs.Items.Add("\tType: " + excp.GetType().ToString());
                 this.listBoxLogs.Items.Add("\tMessage: " + excp.Message);
             }
+
+            catch (ApplicationException appEx)
+            {
+                this.tbAlpha.Text = this.tbClasseBag.Text = this.tbCompagnie.Text = this.tbItineraire.Text = this.tbJourExploitation.Text = this.tbLigne.Text = "";
+                this.cbContinuation.Checked = this.cbRush.Checked = false;
+                this.tbAlpha.Enabled = this.tbClasseBag.Enabled = this.tbCompagnie.Enabled = this.tbItineraire.Enabled = this.tbJourExploitation.Enabled =
+                this.tbLigne.Enabled = this.cbContinuation.Enabled = this.cbRush.Enabled = true;
+
+            }
         }
 
         //bouton d'ajout de bagage
         private void button2_Click(object sender, EventArgs e)
         {
-            ServiceBagageReference.BagageDefinition bag = new ServiceBagageReference.BagageDefinition();
-
+            BagageDefinition bag = new BagageDefinition();
+            
             bag.CodeIata = this.tbAlpha.Text;
             bag.Compagnie = this.tbCompagnie.Text;
             bag.Itineraire = this.tbItineraire.Text;

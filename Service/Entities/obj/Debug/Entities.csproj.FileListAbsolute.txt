@@ -7,3 +7,8 @@ C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\MyAirport.Pim\Entities\bin\
 C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\MyAirport.Pim\Entities\bin\Debug\Entities.pdb
 C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\MyAirport.Pim\Entities\obj\Debug\Entities.dll
 C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\MyAirport.Pim\Entities\obj\Debug\Entities.pdb
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Service\Entities\bin\Debug\Entities.dll
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Service\Entities\bin\Debug\Entities.pdb
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Service\Entities\obj\Debug\Entities.csprojResolveAssemblyReference.cache
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Service\Entities\obj\Debug\Entities.dll
+C:\Users\Zios27012\Downloads\Projet C#\MyAirport.Pim\Service\Entities\obj\Debug\Entities.pdb

@@ -12,6 +12,7 @@ namespace MyAirport.Serveur
     public interface IService
     {
         [OperationContract]
+        [FaultContract(typeof(MyAirport.Pim.Entities.MultipleBagageFault))]
         MyAirport.Pim.Entities.BagageDefinition GetBagagebyCodeIata(string codeIata);
 
         [OperationContract]

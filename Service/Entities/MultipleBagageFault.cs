@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace MyAirport.Pim.Entities
 {
     [DataContract]
-    class MultipleBagageFault
+    public class MultipleBagageFault
     {
         [DataMember]
         public List<BagageDefinition> ListBagages { get; set; }

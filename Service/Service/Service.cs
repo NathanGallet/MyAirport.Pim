@@ -31,44 +31,59 @@ namespace MyAirport.Serveur
             NbInstance--;
         }
 
-        public MyAirport.Pim.Entities.BagageDefinition GetBagagebyCodeIata(string codeIata)
+        public BagageDefinition GetBagagebyCodeIata(string codeIata)
         {
             InstanceCall++;
             CountCall++;
 
-            List<BagageDefinition> res = MyAirport.Pim.Model.Factory.Model.GetBagageByCodeIata(codeIata);
-            if(res != null)
+            List<BagageDefinition> res = null;
+
+            try
             {
-                if(res.Count == 1)
+                res = Factory.Model.GetBagageByCodeIata(codeIata);
+                if (res != null)
                 {
-                    return res[0];
+                    if (res.Count == 1)
+                    {
+                        return res[0];
+                    }
+                    else
+                    {
+                        MultipleBagageFault fault = new MultipleBagageFault();
+                        fault.ListBagages = res;
+                        fault.CodeIata = codeIata;
+                        fault.Message = "Il existe plusieurs bagages avec le code Iata demandé";
+                        throw new FaultException <MultipleBagageFault>(fault);
+                    }
                 }
                 else
                 {
-                    
-                    throw new FaultException(new FaultReason("Il existe " + res.Count + " bagages avec le code Iata demandé"), 
-                        new FaultCode("MultipleBagage"));
+                    return null;
                 }
             }
-            else
-            {   
-                return null;
+            catch (FaultException<MultipleBagageFault> excp)
+            {
+                throw excp;
             }
+            catch (Exception)
+            {
+                throw new FaultException(new FaultReason("Un problème est survenue lors de votre demande, bon chance !"));
+            }             
         }
 
         public BagageDefinition GetBagageById(int idBagage)
         {
-            return MyAirport.Pim.Model.Factory.Model.GetBagageById(idBagage);
+            return Factory.Model.GetBagageById(idBagage);
         }
 
         public int CreateBagage(BagageDefinition bag)
         {
-            return MyAirport.Pim.Model.Factory.Model.CreateBagage(bag);
+            return Factory.Model.CreateBagage(bag);
         }
 
         public RoutageBagage GetInfoRoutage(int idBagage)
         {
-            return MyAirport.Pim.Model.Factory.Model.GetInfoRoutage(idBagage);
+            return Factory.Model.GetInfoRoutage(idBagage);
         }
     }
 }
