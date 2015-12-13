@@ -105,28 +105,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Entities.csproj">
-      <Project>{1bdb03e6-fa6e-41c1-b986-06fab8a7c79e}</Project>
-      <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model.AbstractDefinition\Model.AbstractDefinition.csproj">
-      <Project>{e42c28c1-92e8-4d2d-8189-5abee449a173}</Project>
-      <Name>Model.AbstractDefinition</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model.Factory\Model.Factory.csproj">
-      <Project>{e0d6e965-41d3-4401-b50b-8f7fa74eb411}</Project>
-      <Name>Model.Factory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model.Natif\Model.Natif.csproj">
-      <Project>{16f14bd3-2eff-4139-87c0-68494d2d4c3e}</Project>
-      <Name>Model.Natif</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model.Sql\Model.Sql.csproj">
-      <Project>{e7177c4c-dac5-4a41-ad8d-794bf70a475a}</Project>
-      <Name>Model.Sql</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>

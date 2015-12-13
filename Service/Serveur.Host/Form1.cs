@@ -25,7 +25,7 @@ namespace Serveur.Host
         void host_State(object sender, EventArgs e)
         {
             this.textBox1.Text = this.host.State.ToString();
-            this.listBox1.Items.Add("Chagnement d'état :" + this.host.State.ToString());
+            this.listBox1.Items.Add("Changement d'état :" + this.host.State.ToString());
         }
 
         private void buttonCreate_Click_1(object sender, EventArgs e)
@@ -43,5 +43,10 @@ namespace Serveur.Host
             this.listBox1.Items.Add("Création du service.");
         }
 
+        private void buttonOpen_Click(object sender, EventArgs e)
+        {
+            host.Open();
+            this.textBox1.Text = host.State.ToString();
+        }
     }
 }

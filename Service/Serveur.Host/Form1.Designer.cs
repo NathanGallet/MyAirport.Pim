@@ -70,6 +70,7 @@ namespace Serveur.Host
             this.buttonOpen.TabIndex = 2;
             this.buttonOpen.Text = "Open";
             this.buttonOpen.UseVisualStyleBackColor = true;
+            this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
             // label1
             // 

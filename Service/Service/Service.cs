@@ -16,6 +16,7 @@ namespace MyAirport.Serveur
 
         public static int NbInstance = 0;
         public static int CountCreate = 0;
+
         public static int CountCall = 0;
         public int InstanceCall = 0;
 
@@ -32,7 +33,25 @@ namespace MyAirport.Serveur
 
         public MyAirport.Pim.Entities.BagageDefinition GetBagagebyCodeIata(string codeIata)
         {
-            return MyAirport.Pim.Model.Factory.Model.GetBagageByCodeIata(codeIata);
+            InstanceCall++;
+            CountCall++;
+
+            List<BagageDefinition> res = MyAirport.Pim.Model.Factory.Model.GetBagageByCodeIata(codeIata);
+            if(res != null)
+            {
+                if(res.Count == 1)
+                {
+                    return res[0];
+                }
+                else
+                {
+                    throw new Exception("Trop de bagage retourné");
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public BagageDefinition GetBagageById(int idBagage)

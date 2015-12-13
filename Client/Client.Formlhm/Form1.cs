@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,38 +15,30 @@ namespace Client.Formlhm
     public partial class Form1 : Form
     {
         ServiceBagageReference.ServiceClient proxy = null;
+
         public Form1()
         {
             InitializeComponent();
             proxy = new ServiceBagageReference.ServiceClient();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        //bouton de recherche de bagage
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
                 var bagage2 = proxy.GetBagagebyCodeIata(this.tbAlpha.Text);
+
                 this.tbAlpha.Text = bagage2.LigneAlpha.ToString();
-                this.tbAlpha.Enabled = false;
                 this.tbClasseBag.Text = bagage2.ClasseBagage.ToString();
-                this.tbClasseBag.Enabled = false;
                 this.tbCompagnie.Text = bagage2.Compagnie;
-                this.tbCompagnie.Enabled = false;
                 this.tbItineraire.Text = bagage2.Itineraire;
-                this.tbItineraire.Enabled = false;
                 this.tbJourExploitation.Text = bagage2.JourExploitation.ToString();
-                this.tbJourExploitation.Enabled = false;
                 this.tbLigne.Text = bagage2.Ligne.ToString();
-                this.tbLigne.Enabled = false;
                 this.cbContinuation.Checked = bagage2.Continuation;
-                this.cbContinuation.Enabled = false;
                 this.cbRush.Checked = bagage2.Rush;
-                this.cbRush.Enabled = false;
+
+                disableInput();
             }
             catch (ApplicationException appEx)
             {
@@ -55,44 +48,64 @@ namespace Client.Formlhm
                 this.tbLigne.Enabled = this.cbContinuation.Enabled = this.cbRush.Enabled = true;
 
             }
-            catch
+            catch (CommunicationException excp)
             {
-                MessageBox.Show("Une erreur s’est produite dans le traitement de votre demande.\nMerci de bien vouloir re tester ultérieurement ou de contacter votre administrateur.", "Erreur dans le traitement de votre demande", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.listBoxLogs.Items.Add("Une erreur de communication c'est produite dans le traitement de votre demande");
+                this.listBoxLogs.Items.Add("\tType: " + excp.GetType().ToString());
+                this.listBoxLogs.Items.Add("\tMessage: " + excp.Message);
             }
-
+            catch (Exception excp)
+            {
+                this.listBoxLogs.Items.Add("Une erreur s'est produite dans le traitement de votre demande");
+                this.listBoxLogs.Items.Add("\tType: " + excp.GetType().ToString());
+                this.listBoxLogs.Items.Add("\tMessage: " + excp.Message);
+            }
         }
 
+        //bouton d'ajout de bagage
         private void button2_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //ajouter les options pour CreateBagage
-            }
-            catch
-            {
-                MessageBox.Show("Une erreur s’est produite dans le traitement de votre demande.\nMerci de bien vouloir re tester ultérieurement ou de contacter votre administrateur.", "Erreur dans le traitement de votre demande", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ServiceBagageReference.BagageDefinition bag = new ServiceBagageReference.BagageDefinition();
 
+            bag.CodeIata = this.tbAlpha.Text;
+            bag.Compagnie = this.tbCompagnie.Text;
+            bag.Itineraire = this.tbItineraire.Text;
+            bag.Rush = this.cbRush.Checked;
+            bag.Continuation = this.cbContinuation.Checked;
+            bag.ClasseBagage = Convert.ToChar(this.tbClasseBag.Text);
+            bag.Ligne = Convert.ToInt32(this.tbLigne.Text);
+            bag.JourExploitation = Convert.ToInt32(this.tbJourExploitation.Text);
+
+            proxy.CreateBagage(bag);
+            this.listBoxLogs.Items.Add("Le bagage a bien été enregistré, ID : " + bag.IdBagage);
+            
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        //decoche tous les boutons
+        private void disableInput()
         {
-
+            this.tbAlpha.Enabled = false;
+            this.tbClasseBag.Enabled = false;
+            this.tbCompagnie.Enabled = false;
+            this.tbItineraire.Enabled = false;
+            this.tbJourExploitation.Enabled = false;
+            this.tbLigne.Enabled = false;
+            this.cbContinuation.Enabled = false;
+            this.cbRush.Enabled = false;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        //coche tous les boutons
+        private void enableInput()
         {
-
+            this.tbAlpha.Enabled = true;
+            this.tbClasseBag.Enabled = true;
+            this.tbCompagnie.Enabled = true;
+            this.tbItineraire.Enabled = true;
+            this.tbJourExploitation.Enabled = true;
+            this.tbLigne.Enabled = true;
+            this.cbContinuation.Enabled = true;
+            this.cbRush.Enabled = true;
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
